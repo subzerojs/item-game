@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="./style/main.css">
     <script src="./js/jquery.js"></script>
     <script src="./data/items.js"></script>
-    <script src="./data/quetion.js"></script>
+
   </head>
   <body>
     <div id="app">
@@ -15,18 +15,24 @@
       <div class="quetions">
           <h5>Вопросы</h5>
           <div class="buttons-list">
-              <div class="btn quetion" v-for="item in gameData" @click="quetionHandler(item)">{{item}}</div>
+  
           </div>
-          <div class="btn buy" @click="buyHandler">Докупить вопросы</div>
+          <div class="btn buy">Докупить вопросы</div>
       </div>
       <div class="screen-wrapper">
           <div class="screen-scene">
-              <div class="scene" style='background-image: url(data/images/backgrounds/background.jpg);'> </div>
+              <div class="scene" style='background-image: url(data/images/backgrounds/background.jpg);'>
+                  <input  class="qty" value="1900" type="text"/>
+                  <input  class="power" value="300" type="text"/>
+                  <div class="timer">60</div>
+                  <div class="item-description"></div>
+              </div>
               <div class="items-list"></div>
           </div>
 
       </div>
     </div>
+    <div class="answer-debug"></div>
     <script src="./js/app.js"></script>
   </body>
 </html>

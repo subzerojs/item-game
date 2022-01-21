@@ -1,6 +1,7 @@
 html, body{
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 *{
   box-sizing: border-box;
@@ -21,6 +22,7 @@ body{
   height: 655px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
   display: flex;
+
 }
 .screen-wrapper{
   width: 80%;
@@ -33,7 +35,9 @@ body{
 }
 .btn{
     color: #555;
-    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 18px;
     text-align: center;
     border: 2px solid #555;
@@ -42,6 +46,7 @@ body{
     background-color: white;
     width: 145px;
     height: 50px;
+    transition: 0.2s;
 }
 .btn:hover{
   background-color: rgba(0, 0, 0, 0.5);
@@ -51,6 +56,7 @@ body{
 
 
 .scene{
+  position: relative;
   width: 100%;
   height: 77%;
   background-size: cover;
@@ -94,7 +100,10 @@ body{
   margin-top: 85px;
   background-color: #cee741;
 }
-
+input{
+  outline: 0;
+  border: 0;
+}
 
 /**
  * Items
@@ -107,4 +116,66 @@ body{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+}
+
+.qty{
+  width: 80px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  color: #333;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 8px 5px;
+  text-align: right;
+  border-radius: 8px;
+}
+.power{
+  width: 80px;
+  height: 50px;
+  position: absolute;
+  top: 20px;
+  left: 175px;
+  color: #333;
+  text-align: right;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 8px 5px;
+  border-radius: 8px;
+}
+.timer{
+  width: 80px;
+  height: 40px;
+  position: absolute;
+  top: 70px;
+  left: 200px;
+  color: #333;
+  /*background-color: white;*/
+  text-align: right;
+  font-size: 20px;
+  font-weight: 800;
+  padding: 2px 10px;
+}
+
+.item-description{
+  width: 395px;
+  height: 75px;
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  padding: 0px 20px;
+  border-radius: 8px;
+  color: #555;;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.answer-debug{
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  color: wheat;
+  font-size: 22px;
 }
