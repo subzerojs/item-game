@@ -57,7 +57,7 @@ class Game {
     }
     else{
       $($item).css('opacity', 0)
-      this.energy-=5
+      this.energy-=50
       if(this.energy<0){
         this.endGame()
       }
