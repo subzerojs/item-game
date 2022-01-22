@@ -151,3 +151,19 @@ let arr =  [...trueArr, ...falseArr].sort(()=>{ return 0.5- Math.random() })
 function checkCollide(){
   //gameQuetions.indexOf()
 }
+
+/**
+ * TODO
+ */
+
+/**
+ 
+ITEMS Buttons совподения предметов
+
+Вопросы в боковой панели, необходимо исключить правильные из всех
+
+остальных.
+
+
+
+ */

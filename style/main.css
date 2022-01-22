@@ -120,7 +120,6 @@ input{
 .items-list .quetion{
 
 }
-
 .qty{
   width: 80px;
   height: 50px;
@@ -189,6 +188,13 @@ input{
   background-color: #8fd14f;
 }
 .item--false{
+  background-color: #db0064;
+  color: white;
+}
+.item--true:hover{
+  background-color: #8fd14f;
+}
+.item--false:hover{
   background-color: #db0064;
   color: white;
 }
