@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="./style/main.css">
     <script src="./js/jquery.js"></script>
     <script src="./data/items.js"></script>
-
+    <script src="./data/quetions.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/View.js"></script>
   </head>
   <body>
     <div id="app">
@@ -23,13 +25,19 @@
           <div class="screen-scene">
               <div class="scene" style='background-image: url(data/images/backgrounds/background.jpg);'>
                   <input  class="qty" value="1900" type="text"/>
-                  <input  class="power" value="300" type="text"/>
+                  <input  class="energy" value="300" type="text"/>
                   <div class="timer">60</div>
                   <div class="item-description"></div>
               </div>
               <div class="items-list"></div>
           </div>
 
+      </div>
+      <div class="modal">
+        <div class="modal__msg">
+            <h2>Победа!</h2>
+            <div class="btn">Играть ещё раз</div>
+        </div>
       </div>
     </div>
     <div class="answer-debug"></div>

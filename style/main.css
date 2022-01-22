@@ -5,6 +5,7 @@ html, body{
 }
 *{
   box-sizing: border-box;
+  position: relative;
 }
 body{
   width: 100vw;
@@ -22,7 +23,6 @@ body{
   height: 655px;
   box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
   display: flex;
-
 }
 .screen-wrapper{
   width: 80%;
@@ -117,6 +117,9 @@ input{
   flex-wrap: wrap;
   justify-content: space-between;
 }
+.items-list .quetion{
+
+}
 
 .qty{
   width: 80px;
@@ -131,7 +134,7 @@ input{
   text-align: right;
   border-radius: 8px;
 }
-.power{
+.energy{
   width: 80px;
   height: 50px;
   position: absolute;
@@ -178,4 +181,46 @@ input{
   right: 20px;
   color: wheat;
   font-size: 22px;
+}
+
+
+
+.item--true{
+  background-color: #8fd14f;
+}
+.item--false{
+  background-color: #db0064;
+  color: white;
+}
+
+.modal{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0, 0, 0.7);
+}
+
+.modal .modal__msg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 250px;
+  background-color: wheat;
+  flex-direction: column;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+}
+.modal .modal__msg h2{
+  color: #555;
+}
+.modal .modal__msg .btn{
+  background-color: #8fd14f;
+}
+.modal .modal__msg .btn:hover{
+  background-color: #cee741;
+  color: #111;
 }
