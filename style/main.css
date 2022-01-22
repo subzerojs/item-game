@@ -186,6 +186,7 @@ input{
 
 .item--true{
   background-color: #8fd14f;
+  color: white;
 }
 .item--false{
   background-color: #db0064;
@@ -193,7 +194,7 @@ input{
 }
 .item--true:hover{
   background-color: #8fd14f;
-  color: #555;
+  color: white;
 }
 .item--false:hover{
   background-color: #db0064;
