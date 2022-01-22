@@ -193,6 +193,7 @@ input{
 }
 .item--true:hover{
   background-color: #8fd14f;
+  color: #555;
 }
 .item--false:hover{
   background-color: #db0064;
