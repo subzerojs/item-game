@@ -25,12 +25,13 @@ function random(max, min=1) {
 
 function getCurrentQuetions(currentItemQuetions){
  let trueArr = []
- for(let i=0;i<random(4, 2);i++){
+ for(let i=0;i<random(5, 3);i++){
    let q = currentItemQuetions[ random(currentItemQuetions.length-1) ]
 
    let obj = {status: true, quetion: q}
    trueArr.push(obj)
  }
+ console.log(trueArr)
  let falseArr = []
  for(let i=0;i<(7-trueArr.length);i++){
    let obj = {status: false, quetion: gameQuetions[ random(gameQuetions.length-1) ] }
@@ -40,4 +41,13 @@ function getCurrentQuetions(currentItemQuetions){
   let arr =  [...trueArr, ...falseArr].sort(()=>{ return 0.5- Math.random() })
 
   return arr
+}
+
+/**
+ * UID
+ */
+
+let _id_counter = 0
+function uid() {
+  return (_id_counter++).toString(36) +  Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36)
 }

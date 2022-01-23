@@ -242,10 +242,12 @@ input{
   color: #667;
   display: flex;
   margin-right: 20px;
+  align-items: center;
 
 }
 .debug-item label{
-    padding-right: 5px;
+    padding-right: 0px;
+
 }
 .answer-debug input{
   width: 70px;
@@ -254,7 +256,7 @@ input{
   font-size: 18px;
   padding: 3px 7px;
   border-radius: 4px;
-
+  margin-left: 5px;
 }
 .current-word{
   background-color: #445;

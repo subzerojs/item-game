@@ -13,6 +13,7 @@ class Game {
   qtyIncrement = 7
   energyDecrementFalseItem = 50
   energyDecrementTrueItem = 5
+  #uidObj = {}
   constructor (items){
     this.items = items
     this.view = new View()
@@ -49,6 +50,7 @@ class Game {
   }*/
   setLevel (){
     this.time = 60
+    this.#uidObj = {}
     this.createCurrentData()
     //this.timer()
     this.view.render(this.current)
@@ -66,23 +68,28 @@ class Game {
         this.endGame()
       }
     }
-    this.view.energy.val(this.energy)
+    this.view.energy.html(this.energy)
   }
   addEventLiteners (){
     let _this = this
+
     $('.buttons-list').on('click', '.quetion', function (){
       let param = $(this).data('q')
-   
-      if(param){
-        $(this).addClass('item--true')
-        _this.qty+=_this.qtyIncrement
-       
+      let quid = $(this).data('uid')
+      if(!_this.#uidObj.hasOwnProperty(quid)){
+
+            if(param){
+              $(this).addClass('item--true')
+              _this.qty+=_this.qtyIncrement
+             
+            }
+            else{
+              $(this).addClass('item--false')
+              _this.qty-=_this.qtyDecrement
+            }
       }
-      else{
-        $(this).addClass('item--false')
-        _this.qty-=_this.qtyDecrement
-      }
-       _this.view.qty.val(_this.qty)
+      _this.#uidObj[quid] = null
+      _this.view.qty.html(_this.qty)
     })
     $('.quetions .buy').on('click', function (){
       alert('Докупить')

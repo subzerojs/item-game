@@ -8,10 +8,10 @@ class View{
     this.current.quetions.map(item=>{
           let tpl  = ''
           if(item.status){
-                tpl  = `<div class="btn quetion" data-q="true">${item.quetion}</div>`
+                tpl  = `<div class="btn quetion" data-q="true" data-uid="${uid()}">${item.quetion}</div>`
           }
           else{
-                tpl  = `<div class="btn quetion" data-q="false">${item.quetion}</div>`
+                tpl  = `<div class="btn quetion" data-q="false" data-uid="${uid()}">${item.quetion}</div>`
           }
           $('.buttons-list').append(tpl)
     })
