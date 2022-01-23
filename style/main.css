@@ -14,6 +14,7 @@ body{
   justify-content: center;
   align-items: center;
   align-content: center;
+  flex-direction: column;
   background-color: #556;
 }
 #app {
@@ -174,13 +175,6 @@ input{
   align-items: center;
 }
 
-.answer-debug{
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  color: wheat;
-  font-size: 22px;
-}
 
 
 
@@ -232,3 +226,46 @@ input{
   background-color: #cee741;
   color: #111;
 }
+.answer-debug{
+  display: flex;
+  align-items: center;
+  align-content: center;
+  width: 924px;
+  background-color: rgba(0,0,0,0.3);
+  font-size: 22px;
+  margin-top: 10px;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.debug-item{
+  color: #667;
+  display: flex;
+  margin-right: 20px;
+
+}
+.debug-item label{
+    padding-right: 5px;
+}
+.answer-debug input{
+  width: 70px;
+  background-color: #445;
+  color: #999;
+  font-size: 18px;
+  padding: 3px 7px;
+  border-radius: 4px;
+
+}
+.current-word{
+  background-color: #445;
+  color: #999;
+  border-radius: 4px;
+  padding: 3px 15px;
+  margin: 0;
+  flex: 1 1;
+  display: flex;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 20px;
+}
+

@@ -24,8 +24,8 @@
       <div class="screen-wrapper">
           <div class="screen-scene">
               <div class="scene" style='background-image: url(data/images/backgrounds/background.jpg);'>
-                  <input  class="qty" value="1900" type="text"/>
-                  <input  class="energy" value="300" type="text"/>
+                  <div  class="qty"></div>
+                  <div  class="energy"></div>
                   <div class="timer">60</div>
                   <div class="item-description"></div>
               </div>
@@ -40,7 +40,35 @@
         </div>
       </div>
     </div>
-    <div class="answer-debug"></div>
+    <div class="answer-debug">
+
+        <div class="debug-item">
+          <label>[$]</label>
+          <input  class="param-qty"  type="number"/>
+        </div>
+        <div class="debug-item">
+          <label>[♮]</label>
+          <input  class="param-energy" type="number"/>
+        </div>
+        <div class="debug-item">
+          <label>♮+</label>
+          <input type="number" class="energyDecrementTrueItem"/>
+        </div>
+        <div class="debug-item">
+          <label>♮-</label>
+          <input type="number" class="energyDecrementFalseItem"/>
+        </div>
+
+        <div class="debug-item">
+          <label>$+</label>
+          <input type="number" class="qtyIncrement"/>
+        </div>
+        <div class="debug-item">
+          <label>$-</label>
+          <input type="number" class="qtyDecrement"/>
+        </div>
+        <div class="debug-item current-word"></div>
+    </div>
     <script src="./js/app.js?v=12334242123"></script>
   </body>
 </html>

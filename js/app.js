@@ -9,15 +9,18 @@ class Game {
     items: [],
     item: null
   }
+  qtyDecrement = 15
+  qtyIncrement = 7
+  energyDecrementFalseItem = 50
+  energyDecrementTrueItem = 5
   constructor (items){
     this.items = items
     this.view = new View()
     this.init()
   }
   init (){
-    this.view.energy.val(this.energy)
-    this.view.qty.val(this.qty)
     this.addEventLiteners()
+    this.addDebugEventLiteners ()
     this.setLevel()
   }
 
@@ -49,15 +52,16 @@ class Game {
     this.createCurrentData()
     //this.timer()
     this.view.render(this.current)
+    this.updateValue()
   }
   checkAnswer (a, b, $item){
     if(a===b){
       $('.modal').css('display', 'flex')
-      this.energy-=1
+      this.energy-=this.energyDecrementTrueItem
     }
     else{
       $($item).css('opacity', 0)
-      this.energy-=50
+      this.energy-=this.energyDecrementFalseItem
       if(this.energy<0){
         this.endGame()
       }
@@ -71,12 +75,12 @@ class Game {
    
       if(param){
         $(this).addClass('item--true')
-        _this.qty+=5
+        _this.qty+=_this.qtyIncrement
        
       }
       else{
         $(this).addClass('item--false')
-        _this.qty-=15
+        _this.qty-=_this.qtyDecrement
       }
        _this.view.qty.val(_this.qty)
     })
@@ -87,28 +91,12 @@ class Game {
     $('.items-list').on('click', '.quetion', function (){
         _this.checkAnswer(_this.current.item.name, this.innerHTML, this)
     })
-    $( ".qty" ).keyup(function() {
-      let text = $(this).val()
-      if(text.length>5){
-        $(this).val(0)
-      }
-      if( isNaN( Number(text) ) ){
-        $(this).val(0)
-      }
-    })
-    $( ".energy" ).keyup(function() {
-      let text = $(this).val()
-      if(text.length>4){
-        $(this).val(0)
-      }
-      if( isNaN( Number(text) ) ){
-        $(this).val(0)
-      }
-    })
+
     $('.modal__msg .btn').on('click', function (){
       _this.setLevel()
       $('.modal').fadeOut()
     })
+    
   }
   timer (){
     let int = setInterval(()=>{
@@ -122,35 +110,61 @@ class Game {
   }
   endGame (){
     alert('Game Over')
+   // $('.modal__msg').html('Проиграл')
+  }
+  addDebugEventLiteners(){
+    let _this = this
+    // qty
+   $( ".param-qty" ).on('change keyup', function (){
+        _this.qty = +this.value;
+        _this.updateValue()
+   })
+    // energy
+    $( ".param-energy" ).on('change keyup', function (){
+        _this.energy = +this.value;
+        _this.updateValue()
+    })
+    // setValue
+
+
+    $( ".qtyIncrement" ).on('change keyup', function (){
+        _this.qtyIncrement = +this.value; 
+    })
+    $( ".qtyDecrement" ).on('change keyup', function (){
+        _this.qtyDecrement = +this.value; 
+    })
+    $( ".energyDecrementFalseItem" ).on('change keyup', function (){
+        _this.energyDecrementFalseItem = +this.value; 
+    })
+    $( ".energyDecrementTrueItem" ).on('change keyup', function (){
+        _this.energyDecrementTrueItem = +this.value; 
+    })
+  }
+
+  updateValue(){
+    this.view.energy.html(this.energy)
+    this.view.qty.html(this.qty)
+    $( ".param-qty" ).val(this.qty)  
+    $( ".param-energy" ).val(this.energy)  
+    $('.current-word').html(this.current.item.name)
+    $( ".qtyIncrement" ).val(this.qtyIncrement)
+    $( ".qtyDecrement" ).val(this.qtyDecrement)
+    $( ".energyDecrementFalseItem" ).val(this.energyDecrementFalseItem)
+    $( ".energyDecrementTrueItem" ).val(this.energyDecrementTrueItem)
   }
 }
 
 var game = new Game(gameItems)
 
 
-function getCurrentQuetions(currentItemQuetions){
- let trueArr = []
- for(let i=0;i<random(4, 2);i++){
-   let q = currentItemQuetions[ random(currentItemQuetions.length-1) ]
 
-   let obj = {status: true, quetion: q}
-   trueArr.push(obj)
- }
-
- let falseArr = []
- for(let i=0;i<(7-trueArr.length);i++){
-   let obj = {status: false, quetion: gameQuetions[ random(gameQuetions.length-1) ] }
-   falseArr.push( obj )
- }
-
-let arr =  [...trueArr, ...falseArr].sort(()=>{ return 0.5- Math.random() })
-
-  return arr
-}
 
 function checkCollide(){
   //gameQuetions.indexOf()
 }
+
+
+
 
 /**
  * TODO

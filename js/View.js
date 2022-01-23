@@ -13,8 +13,6 @@ class View{
           else{
                 tpl  = `<div class="btn quetion" data-q="false">${item.quetion}</div>`
           }
-            
-
           $('.buttons-list').append(tpl)
     })
   }
@@ -30,8 +28,9 @@ class View{
       this.renderQuetions()
       this.renderItems()
       $('.item-description').html(this.current.item.description)
-      $('.answer-debug').html(this.current.item.name)
+      
   }
+
   reset(){
       $('.buttons-list').empty()
       $('.items-list').empty()
