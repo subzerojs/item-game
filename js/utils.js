@@ -29,3 +29,13 @@ let _id_counter = 0
 function uid() {
   return (_id_counter++).toString(36) +  Math.floor(Math.random() * Number.MAX_SAFE_INTEGER).toString(36)
 }
+
+
+
+
+function difference(arrayA, arrayB){
+  return arrayA
+             .filter(num => !arrayB.includes(num))
+             .concat(arrayB.filter(num => !arrayA.includes(num)));
+}
+

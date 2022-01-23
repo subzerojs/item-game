@@ -3,8 +3,10 @@ class CurrentQuetions {
   falseArr = []
   constructor (currentItemQuetions){
     this.currentItemQuetions = currentItemQuetions
+    this.uniqGameQuetions = difference(currentItemQuetions, gameQuetions)
     this.createTrueData()
     this.createFalseData()
+
   }
   addTrueItem (){
       let q = this.currentItemQuetions[ random(this.currentItemQuetions.length-1) ]
@@ -18,7 +20,7 @@ class CurrentQuetions {
   }
   addFalseItem(){
       let commonArr = [...this.trueArr, ...this.falseArr]
-      let q = gameQuetions[ random(gameQuetions.length-1) ]
+      let q = this.uniqGameQuetions[ random(this.uniqGameQuetions.length-1) ]
       if(isItemExists(commonArr, q)){
           this.addFalseItem()
       }
@@ -38,6 +40,7 @@ class CurrentQuetions {
      }
   }
   getData (){
+
     return [...this.trueArr, ...this.falseArr].sort(()=>{ return 0.5- Math.random() })
   }
 }
