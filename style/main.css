@@ -54,6 +54,11 @@ body{
   color: white;
 }
 
+.btn.qn{
+  min-height: 50px;
+
+  height: auto;
+}
 
 
 .scene{
