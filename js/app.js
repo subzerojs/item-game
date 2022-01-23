@@ -24,30 +24,30 @@ class Game {
     this.addDebugEventLiteners ()
     this.setLevel()
   }
-
+  addItem (){
+    let rndItem = this.items[random(this.items.length-1)]
+    let isExist = isItemExists(this.current.items, rndItem)
+    if(isExist){
+       this.addItem()
+    }
+    else{
+      this.current.items.push(rndItem)
+    }
+  }
   createCurrentData (){
 
     this.current.items = []
     this.current.item = {}
     this.current.quetions = []
     for(let i=0;i<8;i++){
-      let rndItem = this.items[random(this.items.length-1)]
-      /*let isExist = isItemExists(this.current.items, rndItem)
-      if(!isExist){
-        console.log('true')
-      }*/
-      this.current.items.push(rndItem)
+          this.addItem()
     }
     this.current.item = this.current.items[random(8)]
     this.current.item.quetions = quetionStringToArray(this.current.item.quetions)
-    this.current.quetions =  getCurrentQuetions(this.current.item.quetions)//quetionStringToArray(this.current.item.quetions).slice(0,7)
+    this.current.quetions =  new CurrentQuetions(this.current.item.quetions).getData()
 
-    
   }
-/*
-  getCurrentItem(){
-    return this.items[this.index]
-  }*/
+
   setLevel (){
     this.time = 60
     this.#uidObj = {}
