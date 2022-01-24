@@ -9,7 +9,7 @@ function quetionStringToArray(str){
                 let ti = item.trim()
                 let chars = ti.split('')
                 chars[0] = chars[0].toUpperCase()
-                return chars.join('')+'?'
+                return chars.join('').trim()+'?'
          })
 }
 
