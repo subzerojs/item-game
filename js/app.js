@@ -14,6 +14,7 @@ class Game {
   energyDecrementFalseItem = 50
   energyDecrementTrueItem = 5
   #uidObj = {}
+  currentQ = null
   constructor (items){
     this.items = items
     this.view = new View()
@@ -44,10 +45,17 @@ class Game {
     }
     this.current.item = this.current.items[random(8)]
     this.current.item.quetions = quetionStringToArray(this.current.item.quetions)
-    this.current.quetions =  new CurrentQuetions(this.current.item.quetions).getData()
-
+    this.currentQ = new CurrentQuetions(this.current.item.quetions)
+    this.current.quetions =  this.currentQ.getData()
+   // this.remainingRightQuetions = _this.currentQ.remainingItems()
   }
+  get remainingRightQuetions (){
+    let trueArr = this.current.quetions.filter(item=>item.status)
+    console.log( new Set([...this.currentQ.currentItemAllQuetions, ...trueArr]) )
 
+    //console.info(difference(this.currentQ.currentItemAllQuetions, trueArr ))
+    return ''//difference(this.currentQ.currentItemAllQuetions, trueArr )
+  }
   setLevel (){
     this.time = 60
     this.#uidObj = {}
@@ -92,7 +100,14 @@ class Game {
       _this.view.qty.html(_this.qty)
     })
     $('.quetions .buy').on('click', function (){
-      alert('Докупить')
+      let trueArr = _this.current.quetions.filter(item=>item.status)
+     
+      $('.modal-buy').css('display', 'flex')
+          
+          trueArr.map(item=>{
+             $('.buy-items').innerHTML+=`<div class="btn">${item.quetion}</div>`
+          })
+      
     })
     // items
     $('.items-list').on('click', '.quetion', function (){
@@ -103,7 +118,10 @@ class Game {
       _this.setLevel()
       $('.modal').fadeOut()
     })
-    
+    $('.modal-buy .btn').on('click', function (){
+      _this.setLevel()
+      $('.modal-buy').fadeOut()
+    })
   }
   timer (){
     let int = setInterval(()=>{

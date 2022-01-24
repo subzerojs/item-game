@@ -76,8 +76,11 @@ body{
 .quetions{
   width: 20%;
   height: 100%;
-  padding: 20px;
+  padding: 10px;
+  padding-right: 0;
   border: 1px solid gray;
+  display: flex;
+   flex-direction: column;
 }
 
 .quetions h5{
@@ -91,19 +94,28 @@ body{
 .quetions .buttons-list{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
+  flex: 1;
   width: 100%;
-  height: 70%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 450px;
+
 }
 
 .quetions .quetion{
-
+  margin-bottom: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 90%;
 }
-
+.quetions .quetion:last-child{
+  margin-bottom: 0px;
+}
 .quetions .buy{
   padding: 3px 20px;
-  margin-top: 85px;
+  margin-top: 15px;
+  width: 90%;
   background-color: #cee741;
 }
 input{
@@ -125,6 +137,8 @@ input{
 }
 .items-list .quetion{
 
+  font-size: 16px;
+  font-weight: 600;
 }
 .qty{
   width: 80px;
@@ -276,3 +290,37 @@ input{
   font-size: 20px;
 }
 
+
+
+
+.modal-buy{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0, 0, 0.7);
+}
+
+.modal-buy .modal-buy__msg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 350px;
+  height: 250px;
+  background-color: wheat;
+  flex-direction: column;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+}
+.modal-buy .modal-buy__msg h2{
+  color: #555;
+}
+.modal-buy .modal-buy__msg .btn{
+  background-color: #8fd14f;
+}
+.modal-buy .modal-buy__msg .btn:hover{
+  background-color: #cee741;
+  color: #111;
+}

@@ -1,26 +1,34 @@
 class CurrentQuetions {
   trueArr = []
   falseArr = []
+  trueQuetions = []
   constructor (currentItemQuetions){
     this.currentItemQuetions = currentItemQuetions
     this.uniqGameQuetions = difference(currentItemQuetions, gameQuetions)
     this.createTrueData()
+    this.trueQuetions = this.trueArr
     this.createFalseData()
 
   }
+  get currentItemAllQuetions(){
+    return this.currentItemQuetions.map(item=>{
+              return {status: true, quetion: item}
+            })
+  }
   addTrueItem (){
-      let q = this.currentItemQuetions[ random(this.currentItemQuetions.length-1) ]
+      let q = this.currentItemQuetions[ random(this.currentItemQuetions.length) ]
       if(isItemExists(this.trueArr, q)){
-          this.addTrueItem ()
+          setTimeout(()=>{ this.addTrueItem() }, 0)
       }
       else{
          let obj = {status: true, quetion: q}
          this.trueArr.push(obj)
       }
+
   }
   addFalseItem(){
       let commonArr = [...this.trueArr, ...this.falseArr]
-      let q = this.uniqGameQuetions[ random(this.uniqGameQuetions.length-1) ]
+      let q = this.uniqGameQuetions[ random(this.uniqGameQuetions.length) ]
       if(isItemExists(commonArr, q)){
           this.addFalseItem()
       }
