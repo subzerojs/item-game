@@ -8,7 +8,7 @@ var options = {
   qtyIncrement: 7,
   energyDecrementFalseItem: 50,
   energyDecrementTrueItem: 5,
-  quetionPrice: 50
+  quetionPrice: 250
 }
 
 var game = new Game(gameItems, load()||options)
@@ -78,3 +78,16 @@ $('.quetion-price-input').on('change keyup', function (){
     game.quetionPrice = +this.value; save(game._params)
     game.updateValue()
 })
+
+
+/**
+ * game-over
+ */
+
+$('.modal-game-over').on('click', function (){
+    game.resetData ()
+    game.setLevel()
+
+    $('.modal-game-over').fadeOut()
+})
+

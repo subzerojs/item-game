@@ -8,6 +8,7 @@ class Game {
   #uidObj = {}
   currentQ = null
   constructor (items, options){
+    this.options = options
     this.time = options.time
     this.qty = options.qty
     this.energy = options.energy 
@@ -39,10 +40,10 @@ class Game {
 
   }
   addItem (){
-    let rndItem = this.items[random(this.items.length-1)]
+    let rndItem = this.items[random(this.items.length)]
     let isExist = isItemExists(this.current.items, rndItem)
     if(isExist){
-       setTimeout(this.addItem, 0)
+       this.addItem()
     }
     else{
       this.current.items.push(rndItem)
@@ -86,7 +87,7 @@ class Game {
     else{
       $($item).css('opacity', 0)
       this.energy-=this.energyDecrementFalseItem
-      if(this.energy<0){
+      if(this.energy<=0){
         this.endGame()
       }
     }
@@ -111,6 +112,9 @@ class Game {
               $(target).addClass('item--false')
             }
             this.qty-=this.qtyDecrement
+            if(this.qty<=0){
+                 this.endGame()
+            }
       }
       this.#uidObj[quid] = param
       this.updateValue()
@@ -134,8 +138,8 @@ class Game {
   }
 
   endGame (){
-    alert('Game Over')
-   // $('.modal__msg').html('Проиграл')
+  
+    $('.modal-game-over').css('display', 'flex')
   }
 
   updateValue(){
@@ -151,5 +155,16 @@ class Game {
     $( ".energyDecrementFalseItem" ).val(this.energyDecrementFalseItem)
     $( ".energyDecrementTrueItem" ).val(this.energyDecrementTrueItem)
     $('.quetion-price-input').val(this.quetionPrice)
+  }
+  resetData (){
+
+    this.time = this.options.time
+    this.qty = this.options.qty
+    this.energy = this.options.energy 
+    this.qtyDecrement = this.options.qtyDecrement
+    this.qtyIncrement = this.options.qtyIncrement
+    this.energyDecrementFalseItem = this.options.energyDecrementFalseItem
+    this.energyDecrementTrueItem = this.options.energyDecrementTrueItem
+    this.quetionPrice = this.options.quetionPrice
   }
 }
