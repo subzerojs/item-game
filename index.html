@@ -44,14 +44,14 @@
       <div class="modal-buy">
         <div class="modal-buy__msg">
             <div class="modal-buy__close">x</div>
-            <h2>Цена за вопрос: 50$</h2>
+            <h2>Цена за вопрос: <span class="price-quetion"></span>$</h2>
             <div class="buy-items"></div>
         
         </div>
       </div>
     </div>
     <div class="answer-debug">
-
+      <div>
         <div class="debug-item">
           <label>$</label>
           <input  class="param-qty"  type="number"/>
@@ -84,11 +84,20 @@
           <input type="number" class="qtyIncrement"/>
         </div>
         <div class="debug-item">
-          <label>$ -</label>
+          <label>$ - </label>
           <input type="number" class="qtyDecrement"/>
         </div>
+        <div class="debug-item">
+          <label>?</label>
+          <input type="number" class="quetion-price-input"/>
+        </div>
+      </div>
+      <div class="debug-item-wrapper">
+
         <div class="debug-item current-word"></div>
+      </div>
     </div>
+
     <script src="./js/app.js?v=12334343"></script>
   </body>
 </html>

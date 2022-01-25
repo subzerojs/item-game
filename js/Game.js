@@ -15,6 +15,7 @@ class Game {
     this.qtyIncrement = options.qtyIncrement
     this.energyDecrementFalseItem = options.energyDecrementFalseItem
     this.energyDecrementTrueItem = options.energyDecrementTrueItem
+    this.quetionPrice = options.quetionPrice
     this.items = items
     this.view = new View()
     this.init()
@@ -27,19 +28,21 @@ class Game {
           qtyDecrement: this.qtyDecrement,
           qtyIncrement: this.qtyIncrement,
           energyDecrementFalseItem: this.energyDecrementFalseItem,
-          energyDecrementTrueItem: this.energyDecrementTrueItem
-
+          energyDecrementTrueItem: this.energyDecrementTrueItem,
+          quetionPrice: this.quetionPrice
       }
 
   }
   init (){
+
     this.setLevel()
+
   }
   addItem (){
     let rndItem = this.items[random(this.items.length-1)]
     let isExist = isItemExists(this.current.items, rndItem)
     if(isExist){
-       this.addItem()
+       setTimeout(this.addItem, 0)
     }
     else{
       this.current.items.push(rndItem)
@@ -62,6 +65,8 @@ class Game {
     return differenceArrayByObj(this.currentQ.currentItemAllQuetions, trueArr, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }
   setLevel (){
+
+    this.view.quetionPrice.html(this.quetionPrice)
     this.time = 60
     this.#uidObj = {}
     this.createCurrentData()
@@ -122,7 +127,7 @@ class Game {
         let trueObj = { status: true, quetion: $(target).data('value'), uid: uid(), pressed: true }
         $(target).css('opacity', 0)
         this.current.quetions.push(trueObj)
-        this.qty-=this.qtyDecrement
+        this.qty-=this.quetionPrice//this.qtyDecrement
         this.view.render(this.current)
         this.updateValue()
         $('.modal-buy').fadeOut()
@@ -137,6 +142,7 @@ class Game {
 
     this.view.energy.html(this.energy)
     this.view.qty.html(this.qty)
+    this.view.quetionPrice.html(this.quetionPrice)
     $( ".param-qty" ).val(this.qty)  
     $( ".param-energy" ).val(this.energy)  
     $('.current-word').html(this.current.item.name)
@@ -144,5 +150,6 @@ class Game {
     $( ".qtyDecrement" ).val(this.qtyDecrement)
     $( ".energyDecrementFalseItem" ).val(this.energyDecrementFalseItem)
     $( ".energyDecrementTrueItem" ).val(this.energyDecrementTrueItem)
+    $('.quetion-price-input').val(this.quetionPrice)
   }
 }

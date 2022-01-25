@@ -7,7 +7,8 @@ var options = {
   qtyDecrement: 15,
   qtyIncrement: 7,
   energyDecrementFalseItem: 50,
-  energyDecrementTrueItem: 5
+  energyDecrementTrueItem: 5,
+  quetionPrice: 50
 }
 
 var game = new Game(gameItems, load()||options)
@@ -70,4 +71,10 @@ $( ".energyDecrementFalseItem" ).on('change keyup', function (){
 })
 $( ".energyDecrementTrueItem" ).on('change keyup', function (){
     game.energyDecrementTrueItem = +this.value; save(game._params) 
+})
+
+
+$('.quetion-price-input').on('change keyup', function (){
+    game.quetionPrice = +this.value; save(game._params)
+    game.updateValue()
 })

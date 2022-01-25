@@ -255,21 +255,30 @@ input{
   margin-top: 10px;
   padding: 5px 10px;
   border-radius: 4px;
+  flex-direction: column;
 }
-
+.answer-debug >div{
+  display:  flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 100%;
+}
 .debug-item{
   color: #667;
   display: flex;
+
   margin-right: 20px;
   align-items: center;
-
+}
+.debug-item:last-child{
+  margin-right: 0px;
 }
 .debug-item label{
     padding-right: 0px;
 
 }
 .answer-debug input{
-  width: 70px;
+  width: 80px;
   background-color: #445;
   color: #999;
   font-size: 18px;
@@ -278,12 +287,13 @@ input{
   margin-left: 5px;
 }
 .current-word{
-  background-color: #445;
+  border: 1px solid #445;
   color: #999;
   border-radius: 4px;
   padding: 3px 15px;
   margin: 0;
-  flex: 1 1;
+  min-width: 365px;
+  justify-content: flex-end;
   display: flex;
   overflow: hidden;
   white-space: nowrap;
@@ -351,4 +361,9 @@ input{
 .modal-buy__close:hover{
   color: brown;
   border-color: brown;
+}
+
+.debug-item-wrapper{
+
+  justify-content: flex-end !important;
 }

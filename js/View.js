@@ -1,8 +1,10 @@
 class View{
+  current = {}
+  energy = $('.energy')
+  qty = $('.qty')
+  quetionPrice = $('.price-quetion')
   constructor (){
-    this.current = {}
-    this.energy = $('.energy')
-    this.qty = $('.qty')
+
   }
   renderQuetions (){
     this.current.quetions.map(item=>{
@@ -28,7 +30,7 @@ class View{
       this.renderQuetions()
       this.renderItems()
       $('.item-description').html(this.current.item.description)
-      
+ 
   }
 
   reset(){
