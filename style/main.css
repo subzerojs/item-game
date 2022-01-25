@@ -337,13 +337,9 @@ input{
   color: #555;
 }
 .modal-buy .modal-buy__msg .btn{
-  background-color: #8fd14f;
   margin-bottom: 10px;
 }
-.modal-buy .modal-buy__msg .btn:hover{
-  background-color: #cee741;
-  color: #111;
-}
+
 
 .modal-buy__close{
   position: absolute;

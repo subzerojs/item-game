@@ -61,9 +61,14 @@ class Game {
     this.currentQ = new CurrentQuetions(this.current.item.quetions)
     this.current.quetions =  this.currentQ.getData()
   }
+  /*
   get remainingRightQuetions (){
     let trueArr = this.current.quetions.filter(item=>item.status)
     return differenceArrayByObj(this.currentQ.currentItemAllQuetions, trueArr, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
+  }*/
+  get remainingQuetions (){
+      let _gameQuetion = gameQuetions.map(item=>{return {quetion: item}})
+      return differenceArrayByObj(_gameQuetion, this.current.quetions, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }
   setLevel (){
 
@@ -122,23 +127,35 @@ class Game {
   buyBtnHandler (){
           $('.modal-buy').css('display', 'flex')
           $('.modal-buy__msg .buy-items').html('')
-          this.remainingRightQuetions.map(item=>{
-                let tpl = `<div class="btn" data-value="${item.quetion}">???</div>`
+
+          this.remainingQuetions.map(item=>{
+             
+                let tpl = `<div class="btn quetion qn" data-value="${item.quetion}">${item.quetion}</div>`
                 $('.modal-buy__msg .buy-items').append(tpl)
           })
   }
   buyQuetionHandler (target){
-        let trueObj = { status: true, quetion: $(target).data('value'), uid: uid(), pressed: true }
+        let selectedObj = null
+        let val = $(target).data('value')
+        if(this.currentQ.currentItemQuetions.includes(val)){
+          selectedObj = { status: true, quetion: val, uid: uid(), pressed: true }
+        }
+        else{
+          selectedObj = { status: false, quetion: val, uid: uid(), pressed: true }
+        }
+        
+      
+        
+
         $(target).css('opacity', 0)
-        this.current.quetions.push(trueObj)
-        this.qty-=this.quetionPrice//this.qtyDecrement
+        this.current.quetions.push(selectedObj)
+        this.qty-=this.quetionPrice
         this.view.render(this.current)
         this.updateValue()
         $('.modal-buy').fadeOut()
   }
 
   endGame (){
-  
     $('.modal-game-over').css('display', 'flex')
   }
 
