@@ -59,7 +59,6 @@ class Game {
   }
   get remainingRightQuetions (){
     let trueArr = this.current.quetions.filter(item=>item.status)
-
     return differenceArrayByObj(this.currentQ.currentItemAllQuetions, trueArr, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }
   setLevel (){
@@ -70,11 +69,14 @@ class Game {
     this.view.render(this.current)
     this.updateValue()
   }
+  get currenNotPressedQuetions(){
+    return this.current.quetions.filter(item=>!item.pressed)
+  }
   answerHandler (a, b, $item){
     if(a===b){
       $('.modal').css('display', 'flex')
       this.energy-=this.energyDecrementTrueItem
-      this.qty+=this.qtyIncrement
+      this.qty+=this.qtyIncrement*this.currenNotPressedQuetions.length
     }
     else{
       $($item).css('opacity', 0)
@@ -83,7 +85,7 @@ class Game {
         this.endGame()
       }
     }
-    this.view.energy.html(this.energy)
+    this.updateValue()
   }
   /**
    * Handlers
@@ -97,34 +99,32 @@ class Game {
           }
       })
       if(!this.#uidObj.hasOwnProperty(quid)){
-
             if(param){
               $(target).addClass('item--true')
-              //_this.qty+=_this.qtyIncrement
-              this.qty-=this.qtyDecrement
             }
             else{
               $(target).addClass('item--false')
-              this.qty-=this.qtyDecrement
             }
+            this.qty-=this.qtyDecrement
       }
       this.#uidObj[quid] = param
-      this.view.qty.html(this.qty)
+      this.updateValue()
   }
   buyBtnHandler (){
           $('.modal-buy').css('display', 'flex')
           $('.modal-buy__msg .buy-items').html('')
-
           this.remainingRightQuetions.map(item=>{
                 let tpl = `<div class="btn" data-value="${item.quetion}">???</div>`
                 $('.modal-buy__msg .buy-items').append(tpl)
           })
   }
   buyQuetionHandler (target){
-        let trueObj = { status: true, quetion: $(target).data('value') }
+        let trueObj = { status: true, quetion: $(target).data('value'), uid: uid(), pressed: true }
         $(target).css('opacity', 0)
         this.current.quetions.push(trueObj)
+        this.qty-=this.qtyDecrement
         this.view.render(this.current)
+        this.updateValue()
         $('.modal-buy').fadeOut()
   }
 
