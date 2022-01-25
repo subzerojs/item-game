@@ -47,20 +47,18 @@ class Game {
     this.current.item.quetions = quetionStringToArray(this.current.item.quetions)
     this.currentQ = new CurrentQuetions(this.current.item.quetions)
     this.current.quetions =  this.currentQ.getData()
-   // this.remainingRightQuetions = _this.currentQ.remainingItems()
+
   }
   get remainingRightQuetions (){
     let trueArr = this.current.quetions.filter(item=>item.status)
-    console.log( new Set([...this.currentQ.currentItemAllQuetions, ...trueArr]) )
 
-    //console.info(difference(this.currentQ.currentItemAllQuetions, trueArr ))
-    return ''//difference(this.currentQ.currentItemAllQuetions, trueArr )
+    return differenceArrayByObj(this.currentQ.currentItemAllQuetions, trueArr, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }
   setLevel (){
     this.time = 60
     this.#uidObj = {}
     this.createCurrentData()
-    //this.timer()
+    this.timer()
     this.view.render(this.current)
     this.updateValue()
   }
@@ -99,15 +97,20 @@ class Game {
       _this.#uidObj[quid] = null
       _this.view.qty.html(_this.qty)
     })
+    // buy
     $('.quetions .buy').on('click', function (){
-      let trueArr = _this.current.quetions.filter(item=>item.status)
-     
-      $('.modal-buy').css('display', 'flex')
-          
-          trueArr.map(item=>{
-             $('.buy-items').innerHTML+=`<div class="btn">${item.quetion}</div>`
+          $('.modal-buy').css('display', 'flex')
+          $('.modal-buy__msg .buy-items').html('')
+          _this.remainingRightQuetions.map(item=>{
+                let tpl = `<div class="btn" data-value="${item.quetion}">???</div>`
+                $('.modal-buy__msg .buy-items').append(tpl)
           })
-      
+    })
+    $('.modal-buy__msg .buy-items').on('click', '.btn', function (){
+        let trueObj = { status: true, quetion: $(this).data('value') }
+        $(this).css('opacity', 0)
+        _this.current.quetions.push(trueObj)
+        _this.view.render(_this.current)
     })
     // items
     $('.items-list').on('click', '.quetion', function (){
@@ -121,6 +124,9 @@ class Game {
     $('.modal-buy .btn').on('click', function (){
       _this.setLevel()
       $('.modal-buy').fadeOut()
+    })
+    $('.modal-buy__close').on('click', function (){
+        $('.modal-buy').fadeOut()
     })
   }
   timer (){
