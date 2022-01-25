@@ -44,3 +44,16 @@ function difference(arrayA, arrayB){
 function differenceArrayByObj (arrayA, arrayB, key){
   return arrayA.filter(({ [key]: value1 }) => !arrayB.some(({ [key]: value2 }) => value2 === value1));
 }
+
+
+function save (_param){
+  localStorage.setItem('minigame-app', JSON.stringify(_param))
+}
+
+function load (){
+  var _param =  localStorage.getItem('minigame-app')
+  if(_param){
+    return JSON.parse(_param)
+  }
+  return false
+}

@@ -21,7 +21,7 @@ class CurrentQuetions {
           setTimeout(()=>{ this.addTrueItem() }, 0)
       }
       else{
-         let obj = {status: true, quetion: q}
+         let obj = {status: true, quetion: q, uid: uid(), pressed: false}
          this.trueArr.push(obj)
       }
 
@@ -33,7 +33,7 @@ class CurrentQuetions {
           this.addFalseItem()
       }
       else{
-         let obj = {status: false, quetion: q }
+         let obj = {status: false, quetion: q, uid: uid(), pressed: false }
          this.falseArr.push( obj )
       }
   }
