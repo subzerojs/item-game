@@ -17,6 +17,8 @@ class Game {
     this.energyDecrementFalseItem = options.energyDecrementFalseItem
     this.energyDecrementTrueItem = options.energyDecrementTrueItem
     this.quetionPrice = options.quetionPrice
+    this.energyDecrementHideTrueItem = options.energyDecrementHideTrueItem
+    this.descriptionPrice = options.descriptionPrice
     this.items = items
     this.view = new View()
     this.init()
@@ -30,7 +32,9 @@ class Game {
           qtyIncrement: this.qtyIncrement,
           energyDecrementFalseItem: this.energyDecrementFalseItem,
           energyDecrementTrueItem: this.energyDecrementTrueItem,
-          quetionPrice: this.quetionPrice
+          quetionPrice: this.quetionPrice,
+          energyDecrementHideTrueItem: this.energyDecrementHideTrueItem,
+          descriptionPrice: this.options.descriptionPrice
       }
 
   }
@@ -73,6 +77,7 @@ class Game {
   setLevel (){
 
     this.view.quetionPrice.html(this.quetionPrice)
+
     this.time = 60
     this.#uidObj = {}
     this.createCurrentData()
@@ -172,6 +177,8 @@ class Game {
     $( ".energyDecrementFalseItem" ).val(this.energyDecrementFalseItem)
     $( ".energyDecrementTrueItem" ).val(this.energyDecrementTrueItem)
     $('.quetion-price-input').val(this.quetionPrice)
+    $('.energyDecrementHideTrueItem').val(this.energyDecrementHideTrueItem)
+    $('.descriptionPrice').val(this.descriptionPrice)
   }
   resetData (){
 
@@ -183,5 +190,20 @@ class Game {
     this.energyDecrementFalseItem = this.options.energyDecrementFalseItem
     this.energyDecrementTrueItem = this.options.energyDecrementTrueItem
     this.quetionPrice = this.options.quetionPrice
+    this.energyDecrementHideTrueItem = this.options.energyDecrementHideTrueItem
+    this.descriptionPrice = this.options.descriptionPrice
+  }
+  checkHiddenItemAgainstCurrentItem(selectedItem){
+  
+    if(selectedItem===this.current.item.name){
+      $('.modal__round-lost').css('display', 'flex')
+      this.energy-=this.energyDecrementHideTrueItem
+      this.updateValue()
+    }
+  }
+  buyDescriptionHandler(){
+    $('.item-description__btn').fadeOut()
+    this.qty-=this.descriptionPrice
+    this.updateValue()
   }
 }

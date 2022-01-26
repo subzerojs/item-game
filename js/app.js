@@ -8,23 +8,39 @@ var options = {
   qtyIncrement: 7,
   energyDecrementFalseItem: 50,
   energyDecrementTrueItem: 5,
-  quetionPrice: 250
+  quetionPrice: 250,
+  energyDecrementHideTrueItem: 100,
+  descriptionPrice: 30
 }
 
 var game = new Game(gameItems, load()||options)
 
-$('.buttons-list').on('click', '.quetion', function (){
+/**
+ * Quetions
+ */
+$('.buttons-list').on('click', '.quetion', function (e){
       game.quetionHandler(this)
 })
+/**
+ * Items
+ */
+$('.items-list').on('click', '.quetion', function (e){
 
-
-
-// items
-$('.items-list').on('click', '.quetion', function (){
-    game.answerHandler(game.current.item.name, this.innerHTML, this)
+    if(e.target.className==='item--hide'){
+        $(this).css('opacity', 0)
+        game.checkHiddenItemAgainstCurrentItem($(this).data('name') )
+    }
+    else{
+        game.answerHandler(game.current.item.name, $(this).data('name') , this)
+    }    
+})
+$('.modal__round-lost .btn').on('click', function (){
+    game.setLevel()
+    $('.modal__round-lost').fadeOut()
 })
 
-$('.modal__msg .btn').on('click', function (){
+
+$('.modal .btn').on('click', function (){
     game.setLevel()
     $('.modal').fadeOut()
 })
@@ -44,9 +60,18 @@ $('.quetions .buy').on('click', function (){
 $('.modal-buy__msg .buy-items').on('click', '.btn', function (){
     game.buyQuetionHandler(this)
 })
+/**
+ * Description
+ */
+$('.item-description__btn svg').on('click', function (){
+    
+     game.buyDescriptionHandler()
+
+})
+
 
 /**
- * _param
+ * _param settings
  */
 // qty
 $( ".param-qty" ).on('change keyup', function (){
@@ -59,7 +84,6 @@ $( ".param-energy" ).on('change keyup', function (){
     game.updateValue()
 })
 // setValue
-
 $( ".qtyIncrement" ).on('change keyup', function (){
     game.qtyIncrement = +this.value;  save(game._params)
 })
@@ -73,10 +97,17 @@ $( ".energyDecrementTrueItem" ).on('change keyup', function (){
     game.energyDecrementTrueItem = +this.value; save(game._params) 
 })
 
-
+//price qietion
 $('.quetion-price-input').on('change keyup', function (){
     game.quetionPrice = +this.value; save(game._params)
     game.updateValue()
+})
+$( ".energyDecrementHideTrueItem" ).on('change keyup', function (){
+    game.energyDecrementHideTrueItem = +this.value; save(game._params) 
+})
+
+$( ".descriptionPrice" ).on('change keyup', function (){
+    game.descriptionPrice = +this.value; save(game._params) 
 })
 
 

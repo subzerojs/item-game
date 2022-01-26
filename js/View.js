@@ -20,7 +20,7 @@ class View{
   }
   renderItems (){
     this.current.items.map(item=>{
-            let tpl = `<div class="btn quetion">${item.name}</div>`
+            let tpl = `<div class="btn quetion item" data-name="${item.name}">${item.name}<span class="item--hide">x</span></div>`
             $('.items-list').append(tpl)
     })
   }
@@ -29,10 +29,9 @@ class View{
       this.current = current
       this.renderQuetions()
       this.renderItems()
-      $('.item-description').html(this.current.item.description)
- 
+      $('.item-description__content').html(this.current.item.description)
+      $('.item-description__btn').css('display', 'flex')
   }
-
   reset(){
       $('.buttons-list').empty()
       $('.items-list').empty()
