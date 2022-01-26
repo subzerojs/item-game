@@ -2,9 +2,9 @@ class CurrentQuetions {
   trueArr = []
   falseArr = []
   trueQuetions = []
-  constructor (currentItemQuetions){
+  constructor (currentItemQuetions, currentFalseItemsQuetions){
     this.currentItemQuetions = currentItemQuetions
-    this.uniqGameQuetions = difference(currentItemQuetions, gameQuetions)
+    this.uniqGameQuetions = currentFalseItemsQuetions//difference(currentItemQuetions, gameQuetions)
     this.createTrueData()
     this.trueQuetions = this.trueArr
     this.createFalseData()
@@ -38,7 +38,7 @@ class CurrentQuetions {
       }
   }
   createTrueData (){
-     for(let i=0;i<random(5, 3);i++){
+     for(let i=0;i<random(5, 4);i++){
        this.addTrueItem()
      }
   }

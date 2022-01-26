@@ -39,7 +39,10 @@ function difference(arrayA, arrayB){
              .concat(arrayB.filter(num => !arrayA.includes(num)));
 }
 
-
+function uniqDiff(arrayA, arrayB){
+  //console.log(arrayA, arrayB)
+  return arrayA.filter(x => !arrayB.includes(x));
+}
 
 function differenceArrayByObj (arrayA, arrayB, key){
   return arrayA.filter(({ [key]: value1 }) => !arrayB.some(({ [key]: value2 }) => value2 === value1));

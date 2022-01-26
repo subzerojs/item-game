@@ -60,9 +60,12 @@ class Game {
     for(let i=0;i<8;i++){
           this.addItem()
     }
-    this.current.item = this.current.items[random(8)]
+    let currentItemIndex = random(8)
+    this.current.item = this.current.items[currentItemIndex]
     this.current.item.quetions = quetionStringToArray(this.current.item.quetions)
-    this.currentQ = new CurrentQuetions(this.current.item.quetions)
+
+
+    this.currentQ = new CurrentQuetions(this.current.item.quetions, this.currentFalseItemsQuetions)
     this.current.quetions =  this.currentQ.getData()
   }
   /*
@@ -70,8 +73,19 @@ class Game {
     let trueArr = this.current.quetions.filter(item=>item.status)
     return differenceArrayByObj(this.currentQ.currentItemAllQuetions, trueArr, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }*/
+  get currentFalseItemsQuetions (){
+      let falseItems = this.current.items.filter(item=>{
+                                          return  JSON.stringify(item)!==JSON.stringify(this.current.item)
+                       })
+      let falseQuetions = falseItems.map(item=>quetionStringToArray(item.quetions) ).flat()
+      let uniqFalseQuetions =  [...new Set(falseQuetions)]
+     
+      return uniqDiff(uniqFalseQuetions, this.current.item.quetions)
+  }
   get remainingQuetions (){
-      let _gameQuetion = gameQuetions.map(item=>{return {quetion: item}})
+      let _common = [...this.current.item.quetions, ...this.currentFalseItemsQuetions.slice(0, this.current.item.quetions.length)]
+      let _gameQuetion = _common.map(item=>{return {quetion: item}})
+
       return differenceArrayByObj(_gameQuetion, this.current.quetions, 'quetion' ).sort(()=>{ return 0.5- Math.random() })
   }
   setLevel (){
@@ -132,26 +146,35 @@ class Game {
   buyBtnHandler (){
           $('.modal-buy').css('display', 'flex')
           $('.modal-buy__msg .buy-items').html('')
-
+          var i = 0;
+          var j = 0
+        /*this.remainingQuetions.map(item=>{
+           if(this.current.item.quetions.includes(item.quetion)){
+            console.log("true:", item.quetion,++i)
+           }
+           else{
+            console.log("false:", item.quetion, ++j)
+           }
+        })*/
+   
           this.remainingQuetions.map(item=>{
-             
-                let tpl = `<div class="btn quetion qn" data-value="${item.quetion}">${item.quetion}</div>`
-                $('.modal-buy__msg .buy-items').append(tpl)
+              
+                    let tpl = `<div class="btn quetion qn" data-value="${item.quetion}">${item.quetion}</div>`
+                    $('.modal-buy__msg .buy-items').append(tpl)
+               
+
           })
   }
   buyQuetionHandler (target){
         let selectedObj = null
         let val = $(target).data('value')
-        if(this.currentQ.currentItemQuetions.includes(val)){
+        if(this.current.item.quetions.includes(val)){
           selectedObj = { status: true, quetion: val, uid: uid(), pressed: true }
         }
         else{
           selectedObj = { status: false, quetion: val, uid: uid(), pressed: true }
         }
         
-      
-        
-
         $(target).css('opacity', 0)
         this.current.quetions.push(selectedObj)
         this.qty-=this.quetionPrice
@@ -165,6 +188,16 @@ class Game {
   }
 
   updateValue(){
+    $('.debug-current-item-quetions').html('')
+    $('.debug-current-false-quetions').html('')
+    this.current.quetions.map(item=>{
+      if(item.status){
+        $('.debug-current-item-quetions').append(`<div class="d-item">${item.quetion}</div>`)
+      }
+      else{
+        $('.debug-current-false-quetions').append(`<div class="d-item">${item.quetion}</div>`)
+      }
+    })
 
     this.view.energy.html(this.energy)
     this.view.qty.html(this.qty)
