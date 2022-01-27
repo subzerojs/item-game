@@ -5,8 +5,10 @@ function isItemExists(items, item){
 
 
 function quetionStringToArray(str){
+
   return str.split(',').map(item=>{
                 let ti = item.trim()
+
                 let chars = ti.split('')
                 chars[0] = chars[0].toUpperCase()
                 return chars.join('').trim()+'?'
