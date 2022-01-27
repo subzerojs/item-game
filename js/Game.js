@@ -175,9 +175,13 @@ class Game {
         $(target).css('opacity', 0)
         this.current.quetions.push(selectedObj)
         this.qty-=this.quetionPrice
+
         this.view.render(this.current)
         this.updateValue()
         $('.modal-buy').fadeOut()
+        if(this.qty<=0){
+                 this.endGame()
+        }
   }
 
   endGame (){
