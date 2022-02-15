@@ -122,3 +122,21 @@ $('.modal-game-over').on('click', function (){
     $('.modal-game-over').fadeOut()
 })
 
+// toogle 4/6/8
+$('.toogle >div').on('click', function (){
+    $('.toogle >div').removeClass('active')
+    $(this).addClass('active')
+    let num = Number(this.innerHTML)
+    if(num===4){
+      $('.items-list').css('width', '60%')
+    }
+    if(num===6){
+        $('.items-list').css('width', '80%')
+    }
+    if(num===8){
+        $('.items-list').css('width', '100%')
+    }
+    game.numberOfItems = num
+    game.setLevel()
+
+})

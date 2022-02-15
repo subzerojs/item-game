@@ -5,14 +5,21 @@ function isItemExists(items, item){
 
 
 function quetionStringToArray(str){
-
-  return str.split(',').map(item=>{
+  console.log(str)
+  if(Array.isArray(str)){
+    /*обрабатываю глюк. Какого то фига приходит массив иногда*/
+    return str
+  }
+  else{
+    return str.split(',').map(item=>{
                 let ti = item.trim()
 
                 let chars = ti.split('')
                 chars[0] = chars[0].toUpperCase()
                 return chars.join('').trim()+'?'
          })
+  }
+
 }
 
 

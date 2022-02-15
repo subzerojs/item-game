@@ -33,6 +33,10 @@ body{
 .screen-scene{
   height: 100%;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .btn{
     color: #555;
@@ -129,7 +133,6 @@ input{
  * Items
  */
 .items-list{
-  border: 1px solid gray;
   width: 100%;
   height: 23%;
   padding: 15px 65px;
@@ -461,7 +464,7 @@ h2{
   border-radius: 4px;
   padding: 3px 15px;
   margin: 0;
-  width: 600px;
+  width: 450px;
   display: flex;
   overflow: hidden;
   white-space: nowrap;
@@ -493,3 +496,29 @@ h2{
   margin-right: 10px;
   margin-bottom: 5px;
 }
+
+.toogle{
+  width: 120px;
+  border: 1px solid #445;
+  border-radius: 4px;
+}
+.toogle >div{
+    background-color: #445;
+    margin-left: 9px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    font-size: 18px;
+    height: 27px;
+    width: 27px;  
+    cursor: pointer;
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.4);
+}
+.toogle >div.active{
+  background-color: rgba(0,0,0,0.1);
+}
+.toogle >div:hover{
+  background-color: rgba(0,0,0,0.1);
+}
+

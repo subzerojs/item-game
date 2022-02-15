@@ -7,6 +7,7 @@ class Game {
   }
   #uidObj = {}
   currentQ = null
+  #numberOfItems = 8
   constructor (items, options){
     this.options = options
     this.time = options.time
@@ -22,6 +23,12 @@ class Game {
     this.items = items
     this.view = new View()
     this.init()
+  }
+  get numberOfItems (){
+    return this.#numberOfItems
+  }
+  set numberOfItems (n){
+    this.#numberOfItems = n
   }
   get _params (){
       return {
@@ -47,7 +54,7 @@ class Game {
     let rndItem = this.items[random(this.items.length)]
     let isExist = isItemExists(this.current.items, rndItem)
     if(isExist){
-       this.addItem()
+        this.addItem()
     }
     else{
       this.current.items.push(rndItem)
@@ -57,10 +64,14 @@ class Game {
     this.current.items = []
     this.current.item = {}
     this.current.quetions = []
-    for(let i=0;i<8;i++){
+    /*
+     * Добавляем предметы
+     */
+
+    for(let i=0;i<this.numberOfItems;i++){
           this.addItem()
     }
-    let currentItemIndex = random(8)
+    let currentItemIndex = random(this.numberOfItems)
     this.current.item = this.current.items[currentItemIndex]
     this.current.item.quetions = quetionStringToArray(this.current.item.quetions)
 
@@ -73,7 +84,11 @@ class Game {
       let falseItems = this.current.items.filter(item=>{
                                           return  JSON.stringify(item)!==JSON.stringify(this.current.item)
                        })
-      let falseQuetions = falseItems.map(item=>quetionStringToArray(item.quetions) ).flat()
+
+      let falseQuetions = falseItems.map(item=>{
+            return quetionStringToArray(item.quetions)
+      } ).flat()
+
       let uniqFalseQuetions =  [...new Set(falseQuetions)]
       let diff = uniqDiff(uniqFalseQuetions, this.current.item.quetions).sort(()=>0.5- Math.random()).slice(0, this.current.item.quetions.length-3)
 
@@ -87,8 +102,8 @@ class Game {
   }
   get remainingQuetions (){
 
-      console.log(this.lastRightQuetions)
-      console.log(this.currentFalseItemsQuetions)
+      //console.log(this.lastRightQuetions)
+      //console.log(this.currentFalseItemsQuetions)
       let _common = [...this.lastRightQuetions, ...this.currentFalseItemsQuetions]
       let _gameQuetion = _common.map(item=>{return {quetion: item}})
 
